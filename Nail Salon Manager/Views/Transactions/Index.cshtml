@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Nail_Salon_Manager.Models.Transaction>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Transactions</h2>
+
+@if (!Model.Any())
+{
+    <p>Your shop does not have any transactions.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Transaction</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(transaction.Amount.ToString(), "Details", "Transactions", new { id = transaction.Id }, null)</td>
+                    <td>@transaction.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

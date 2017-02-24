@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Nail_Salon_Manager.Models.InventoryItem>
+@{
+    ViewBag.Title = "Inventories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Inventories</h2>
+
+@if (!Model.Any())
+{
+    <p>There are no items in the inventory yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Inventory</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inventoryItem in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(inventoryItem.Name, "Details", "Inventories", new { id = inventoryItem.Id }, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
