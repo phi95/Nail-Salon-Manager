@@ -70,6 +70,7 @@ namespace Nail_Salon_Manager.Controllers
                 };
                 return View("EmployeeForm", viewModel);
             }
+
             if (employee.Id == 0)
                 _context.Employees.Add(employee);
             else
