@@ -20,6 +20,11 @@ namespace Nail_Salon_Manager.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Employer> Employers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<InventoryItem> InventoryItems { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

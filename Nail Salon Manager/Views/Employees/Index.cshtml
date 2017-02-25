@@ -6,6 +6,9 @@
 }
 
 <h2>Employees</h2>
+<p>
+    @Html.ActionLink("New Employee", "New", "Employees", null, new { @class = "btn btn-primary" })
+</p>
 
 @if (!Model.Any())
 {
@@ -17,6 +20,8 @@ else
         <thead>
             <tr>
                 <th>Employee</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +29,8 @@ else
             {
                 <tr>
                     <td>@Html.ActionLink(employee.Name, "Details", "Employees", new { id = employee.Id }, null)</td>
+                    <td>@Html.ActionLink(" " , "Edit", "Employees", new { id = employee.Id }, new { @class = "glyphicon glyphicon-edit" })</td>
+                    <td></td>
                 </tr>
             }
         </tbody>

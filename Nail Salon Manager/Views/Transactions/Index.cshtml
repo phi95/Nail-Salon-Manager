@@ -16,16 +16,20 @@ else
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>Transaction</th>
+                <td>Date</td>
+                <th>Amount</th>
                 <th>Description</th>
+                <th>Employee</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var transaction in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(transaction.Amount.ToString(), "Details", "Transactions", new { id = transaction.Id }, null)</td>
+                    <td>@Html.ActionLink(transaction.Date.ToString(), "Details", "Transactions", new { id = transaction.Id }, null)</td>
+                    <td>@transaction.Amount.ToString()</td>
                     <td>@transaction.Description</td>
+                    <td>@transaction.Employee.Name</td>
                 </tr>
             }
         </tbody>

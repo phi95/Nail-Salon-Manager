@@ -16,6 +16,7 @@ else
         <thead>
             <tr>
                 <th>Inventory</th>
+                <th>Cost</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,7 @@ else
             {
                 <tr>
                     <td>@Html.ActionLink(inventoryItem.Name, "Details", "Inventories", new { id = inventoryItem.Id }, null)</td>
+                    <td>@inventoryItem.Cost</td>
                 </tr>
             }
         </tbody>

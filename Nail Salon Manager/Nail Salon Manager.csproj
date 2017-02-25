@@ -204,6 +204,43 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702242043146_InitialModel.cs" />
+    <Compile Include="Migrations\201702242043146_InitialModel.Designer.cs">
+      <DependentUpon>201702242043146_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702242325295_AddTransactionsToEmployee.cs" />
+    <Compile Include="Migrations\201702242325295_AddTransactionsToEmployee.Designer.cs">
+      <DependentUpon>201702242325295_AddTransactionsToEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702242332370_AddedEmployerAndRespectiveAssociations.cs" />
+    <Compile Include="Migrations\201702242332370_AddedEmployerAndRespectiveAssociations.Designer.cs">
+      <DependentUpon>201702242332370_AddedEmployerAndRespectiveAssociations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702242347265_AppliedAnnotationsToModels.cs" />
+    <Compile Include="Migrations\201702242347265_AppliedAnnotationsToModels.Designer.cs">
+      <DependentUpon>201702242347265_AppliedAnnotationsToModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702250002140_addedCostToInventoryItem.cs" />
+    <Compile Include="Migrations\201702250002140_addedCostToInventoryItem.Designer.cs">
+      <DependentUpon>201702250002140_addedCostToInventoryItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702250011453_addedEmployeeToTransactionModel.cs" />
+    <Compile Include="Migrations\201702250011453_addedEmployeeToTransactionModel.Designer.cs">
+      <DependentUpon>201702250011453_addedEmployeeToTransactionModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702250015144_addedDateToTransaction.cs" />
+    <Compile Include="Migrations\201702250015144_addedDateToTransaction.Designer.cs">
+      <DependentUpon>201702250015144_addedDateToTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702250330133_addedDOBToEmployee.cs" />
+    <Compile Include="Migrations\201702250330133_addedDOBToEmployee.Designer.cs">
+      <DependentUpon>201702250330133_addedDOBToEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702250356316_addedMoreEmployeeAttributes.cs" />
+    <Compile Include="Migrations\201702250356316_addedMoreEmployeeAttributes.Designer.cs">
+      <DependentUpon>201702250356316_addedMoreEmployeeAttributes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Employer.cs" />
@@ -213,7 +250,9 @@
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\EmployeeFormViewModel.cs" />
     <Compile Include="ViewModel\EmployerInventoryViewModel.cs" />
+    <Compile Include="ViewModel\TransactionFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-lumen.css" />
@@ -282,6 +321,8 @@
     <Content Include="Views\Transactions\Details.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
+    <Content Include="Views\Employees\EmployeeForm.cshtml" />
+    <Content Include="Views\Transactions\TransactionForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -293,6 +334,35 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702242043146_InitialModel.resx">
+      <DependentUpon>201702242043146_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702242325295_AddTransactionsToEmployee.resx">
+      <DependentUpon>201702242325295_AddTransactionsToEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702242332370_AddedEmployerAndRespectiveAssociations.resx">
+      <DependentUpon>201702242332370_AddedEmployerAndRespectiveAssociations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702242347265_AppliedAnnotationsToModels.resx">
+      <DependentUpon>201702242347265_AppliedAnnotationsToModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702250002140_addedCostToInventoryItem.resx">
+      <DependentUpon>201702250002140_addedCostToInventoryItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702250011453_addedEmployeeToTransactionModel.resx">
+      <DependentUpon>201702250011453_addedEmployeeToTransactionModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702250015144_addedDateToTransaction.resx">
+      <DependentUpon>201702250015144_addedDateToTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702250330133_addedDOBToEmployee.resx">
+      <DependentUpon>201702250330133_addedDOBToEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702250356316_addedMoreEmployeeAttributes.resx">
+      <DependentUpon>201702250356316_addedMoreEmployeeAttributes.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
