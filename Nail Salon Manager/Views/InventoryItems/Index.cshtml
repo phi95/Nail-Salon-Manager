@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Nail_Salon_Manager.Models.InventoryItem>
+@{
+    ViewBag.Title = "Inventory Items";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="display: inline-block">Inventories</h2>
+<h2 style="display: inline-block; float: right;"><a href="/inventoryitems/new"><span class="glyphicon glyphicon-plus"></span></a></h2>
+
+<br />
+<br />
+<table id="inventoryItems" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Inventory</th>
+            <th>Cost</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#inventoryItems").DataTable({
+                ajax: {
+                    url: "/api/inventoryitems",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, inventoryItem) {
+                            return "<a href='/inventoryItems/details/" + inventoryItem.id + "'>" + inventoryItem.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "amount"
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, inventoryItem) {
+                            return "<a href='/inventoryItems/edit/" + inventoryItem.id + "'><span class='glyphicon glyphicon-edit></span></a>";
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link'><span class='glyphicon glyphicon-remove js-delete' data-inventoryItem-id=" + data + "></span></button>";
+                        }
+                    }
+
+                ]
+            });
+
+
+            $("#inventoryItems").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to delete this inventoryItem?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/inventoryItems/" + button.attr("data-inventoryItem-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

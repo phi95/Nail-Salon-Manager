@@ -18,5 +18,6 @@ namespace Nail_Salon_Manager.Dtos
 
         public string Description { get; set; }
         public int EmployeeId { get; set; }
+        public EmployeeDto Employee { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Nail_Salon_Manager.Dtos;
 using Nail_Salon_Manager.Models;
 using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -20,9 +21,9 @@ namespace Nail_Salon_Manager.Controllers.Api
         }
 
         // GET /api/employees
-        public IEnumerable<EmployeeDto> GetEmployees()
+        public IHttpActionResult GetEmployees()
         {
-            return _context.Employees.ToList().Select(Mapper.Map<Employee, EmployeeDto>);
+            return Ok(_context.Employees.ToList().Select(Mapper.Map<Employee, EmployeeDto>));
         }
 
         // GET /api/employees/1
@@ -31,9 +32,16 @@ namespace Nail_Salon_Manager.Controllers.Api
             var employee = _context.Employees.SingleOrDefault(x => x.Id == id);
 
             if (employee == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
             return Ok(Mapper.Map<Employee, EmployeeDto>(employee));
+        }
+
+        // GET /api/employees/1/transactions
+        [Route("api/employees/{id}/transactions")]
+        public IHttpActionResult GetEmployeeTransactions(int id)
+        {
+            return Ok(_context.Transactions.Where(x=>x.EmployeeId == id).ToList().Select(Mapper.Map<Transaction, TransactionDto>));
         }
 
         // POST /api/employees
@@ -54,30 +62,34 @@ namespace Nail_Salon_Manager.Controllers.Api
 
         // PUT /api/employees/1
         [HttpPut]
-        public void UpdateEmployee(int id, EmployeeDto employeeDto)
+        public IHttpActionResult UpdateEmployee(int id, EmployeeDto employeeDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             var employeeInDb = _context.Employees.SingleOrDefault(x => x.Id == id);
             if (employeeInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
             Mapper.Map(employeeDto, employeeInDb);
 
             _context.SaveChanges();
+
+            return Ok();
         }
 
         // DELETE /api/employees/1
         [HttpDelete]
-        public void DeleteEmployee(int id)
+        public IHttpActionResult DeleteEmployee(int id)
         {
             var employeeInDb = _context.Employees.SingleOrDefault(x => x.Id == id);
             if (employeeInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
             _context.Employees.Remove(employeeInDb);
             _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

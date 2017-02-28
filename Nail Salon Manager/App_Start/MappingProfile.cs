@@ -14,6 +14,12 @@ namespace Nail_Salon_Manager.App_Start
         {
             Mapper.CreateMap<Employee, EmployeeDto>();
             Mapper.CreateMap<EmployeeDto, Employee>();
+
+            Mapper.CreateMap<Transaction, TransactionDto>();
+            Mapper.CreateMap<TransactionDto, Transaction>();
+
+            Mapper.CreateMap<InventoryItem, InventoryItemDto>();
+            Mapper.CreateMap<InventoryItemDto, InventoryItem>();
         }
     }
 }

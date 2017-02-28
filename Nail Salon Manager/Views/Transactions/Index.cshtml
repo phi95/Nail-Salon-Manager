@@ -5,33 +5,78 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Transactions</h2>
+<h2 style="display: inline-block">Transactions</h2>
+<h2 style="display: inline-block; float: right;"><a href="/transactions/new"><span class="glyphicon glyphicon-plus"></span></a></h2>
 
-@if (!Model.Any())
+<br/>
+<br/>
+<table id="transactions" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td>Date</td>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Employee</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts
 {
-    <p>Your shop does not have any transactions.</p>
-}
-else
-{
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <td>Date</td>
-                <th>Amount</th>
-                <th>Description</th>
-                <th>Employee</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var transaction in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(transaction.Date.ToString(), "Details", "Transactions", new { id = transaction.Id }, null)</td>
-                    <td>@transaction.Amount.ToString()</td>
-                    <td>@transaction.Description</td>
-                    <td>@transaction.Employee.Name</td>
-                </tr>
+    <script>
+        $(document).ready(function () {
+            var table = $("#transactions").DataTable({
+                ajax: {
+                    url: "/api/transactions",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "date",
+                        render: function (data, type, transaction) {
+                            return formateDate(transaction.date);
+                        }
+                    },
+                    {
+                        data: "amount",
+                    },
+                    {
+                        data: "description"
+                    },
+                    {
+                        data: "employee.name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link'><span class='glyphicon glyphicon-remove js-delete' data-transaction-id=" + data + "></span></button>";
+                        }
+                    }
+
+                ]
+            });
+
+            function formateDate(date) {
+                return new Date(date).toLocaleDateString('en-US', {timeZone: 'UTC'});
             }
-        </tbody>
-    </table>
+
+            $("#transactions").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to delete this transaction?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/transactions/" + button.attr("data-transaction-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 }

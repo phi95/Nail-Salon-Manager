@@ -28,27 +28,6 @@ namespace Nail_Salon_Manager.Controllers
             return View(employees);
         }
 
-        public ViewResult New()
-        {
-            var viewModel = new EmployeeFormViewModel();
-            return View("EmployeeForm", viewModel);
-        }
-
-        public ActionResult Edit(int id)
-        {
-            var employee = _context.Employees.SingleOrDefault(x => x.Id == id);
-
-            if (employee == null)
-                return HttpNotFound();
-
-            var viewModel = new EmployeeFormViewModel
-            {
-                Employee = employee
-            };
-
-            return View("EmployeeForm", viewModel);
-        }
-
         public ActionResult Details(int id)
         {
             var employee = _context.Employees.SingleOrDefault(x => x.Id == id);
@@ -59,31 +38,15 @@ namespace Nail_Salon_Manager.Controllers
             return View(employee);
         }
 
-        [HttpPost]
-        public ActionResult Save(Employee employee)
+        [Route("employees/transactions/{id}")]
+        public ActionResult Transactions(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                var viewModel = new EmployeeFormViewModel
-                {
-                    Employee = employee
-                };
-                return View("EmployeeForm", viewModel);
-            }
+            var employee = _context.Employees.SingleOrDefault(x => x.Id == id);
 
-            if (employee.Id == 0)
-                _context.Employees.Add(employee);
-            else
-            {
-                var employeeInDb = _context.Employees.Single(x => x.Id == employee.Id);
-                employeeInDb.Name = employee.Name;
-                employeeInDb.DOB = employee.DOB;
-                employeeInDb.Address = employee.Address;
-            }
-            _context.SaveChanges();
+            if (employee == null)
+                return HttpNotFound();
 
-            return RedirectToAction("Index", "Employees");
+            return View(employee);
         }
-
     }
 }

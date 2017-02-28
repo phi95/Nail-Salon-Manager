@@ -1,0 +1,23 @@
+﻿@model Nail_Salon_Manager.ViewModel.InventoryItemViewModel
+
+@{
+    ViewBag.Title = "TransactionForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Employees"))
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.InventoryItem.Name)
+        @Html.TextBoxFor(x => x.InventoryItem.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.InventoryItem.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.InventoryItem.Cost)
+        @Html.TextBoxFor(x => x.InventoryItem.Cost, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(x => x.InventoryItem.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
