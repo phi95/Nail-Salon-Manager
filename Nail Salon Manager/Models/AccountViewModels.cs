@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Nail_Salon_Manager.Models
@@ -65,6 +66,10 @@ namespace Nail_Salon_Manager.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(255)]
+        public string Name { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -79,6 +84,12 @@ namespace Nail_Salon_Manager.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Date of Birth")]
+        public DateTime? DOB { get; set; }
+
+        [StringLength(255)]
+        public string Address { get; set; }
     }
 
     public class ResetPasswordViewModel

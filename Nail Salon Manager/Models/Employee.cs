@@ -8,7 +8,7 @@ namespace Nail_Salon_Manager.Models
 {
     public class Employee
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [StringLength(255)]

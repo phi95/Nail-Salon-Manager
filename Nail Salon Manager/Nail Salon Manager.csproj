@@ -264,13 +264,25 @@
     <Compile Include="Migrations\201702250356316_addedMoreEmployeeAttributes.Designer.cs">
       <DependentUpon>201702250356316_addedMoreEmployeeAttributes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702280344337_seed-admin.cs" />
+    <Compile Include="Migrations\201702280344337_seed-admin.Designer.cs">
+      <DependentUpon>201702280344337_seed-admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702280409513_changedEmployeeIdToString.cs" />
+    <Compile Include="Migrations\201702280409513_changedEmployeeIdToString.Designer.cs">
+      <DependentUpon>201702280409513_changedEmployeeIdToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703020124222_addedRequirementsToTransaction.cs" />
+    <Compile Include="Migrations\201703020124222_addedRequirementsToTransaction.Designer.cs">
+      <DependentUpon>201703020124222_addedRequirementsToTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Employer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InventoryItem.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -489,8 +501,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -522,6 +532,7 @@
     <Content Include="Views\Employees\EmployeeForm.cshtml" />
     <Content Include="Views\Employees\Transactions.cshtml" />
     <Content Include="Views\InventoryItems\InventoryItemForm.cshtml" />
+    <Content Include="Views\Transactions\TransactionForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -561,6 +572,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702250356316_addedMoreEmployeeAttributes.resx">
       <DependentUpon>201702250356316_addedMoreEmployeeAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702280344337_seed-admin.resx">
+      <DependentUpon>201702280344337_seed-admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702280409513_changedEmployeeIdToString.resx">
+      <DependentUpon>201702280409513_changedEmployeeIdToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703020124222_addedRequirementsToTransaction.resx">
+      <DependentUpon>201703020124222_addedRequirementsToTransaction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

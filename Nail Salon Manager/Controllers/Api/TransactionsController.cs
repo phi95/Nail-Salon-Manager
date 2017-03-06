@@ -8,6 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Security;
+using System.Security.Claims;
 
 namespace Nail_Salon_Manager.Controllers.Api
 {
@@ -23,7 +25,16 @@ namespace Nail_Salon_Manager.Controllers.Api
         // GET /api/transactions
         public IHttpActionResult GetTransactions()
         {
+            if(User.IsInRole(RoleName.Employer))
+                return Ok(_context.Transactions
+                .Include(x => x.Employee)
+                .ToList()
+                .Select(Mapper.Map<Transaction, TransactionDto>));
+
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            var employeeId = claimsIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
             return Ok(_context.Transactions
+                .Where(x=>x.EmployeeId == employeeId)
                 .Include(x => x.Employee)
                 .ToList()
                 .Select(Mapper.Map<Transaction, TransactionDto>));

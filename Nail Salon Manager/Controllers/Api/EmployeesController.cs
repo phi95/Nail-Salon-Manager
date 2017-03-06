@@ -27,7 +27,7 @@ namespace Nail_Salon_Manager.Controllers.Api
         }
 
         // GET /api/employees/1
-        public IHttpActionResult GetEmployee(int id)
+        public IHttpActionResult GetEmployee(string id)
         {
             var employee = _context.Employees.SingleOrDefault(x => x.Id == id);
 
@@ -38,8 +38,8 @@ namespace Nail_Salon_Manager.Controllers.Api
         }
 
         // GET /api/employees/1/transactions
-        [Route("api/employees/{id}/transactions")]
-        public IHttpActionResult GetEmployeeTransactions(int id)
+        [Route("api/employees/transactions/{id}")]
+        public IHttpActionResult GetEmployeeTransactions(string id)
         {
             return Ok(_context.Transactions.Where(x=>x.EmployeeId == id).ToList().Select(Mapper.Map<Transaction, TransactionDto>));
         }
@@ -62,7 +62,7 @@ namespace Nail_Salon_Manager.Controllers.Api
 
         // PUT /api/employees/1
         [HttpPut]
-        public IHttpActionResult UpdateEmployee(int id, EmployeeDto employeeDto)
+        public IHttpActionResult UpdateEmployee(string id, EmployeeDto employeeDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -80,7 +80,7 @@ namespace Nail_Salon_Manager.Controllers.Api
 
         // DELETE /api/employees/1
         [HttpDelete]
-        public IHttpActionResult DeleteEmployee(int id)
+        public IHttpActionResult DeleteEmployee(string id)
         {
             var employeeInDb = _context.Employees.SingleOrDefault(x => x.Id == id);
             if (employeeInDb == null)

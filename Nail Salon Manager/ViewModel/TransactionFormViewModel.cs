@@ -19,5 +19,7 @@ namespace Nail_Salon_Manager.ViewModel
                 return "New Transaction";
             }
         }
+
+        public IEnumerable<Employee> Employees { get; set; }
     }
 }

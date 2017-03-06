@@ -8,7 +8,7 @@ namespace Nail_Salon_Manager.Dtos
 {
     public class EmployeeDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [StringLength(255)]

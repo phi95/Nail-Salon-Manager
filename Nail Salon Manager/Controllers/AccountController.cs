@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Nail_Salon_Manager.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Nail_Salon_Manager.Controllers
 {
@@ -155,15 +156,28 @@ namespace Nail_Salon_Manager.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //temp hard code for admin
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("Employer"));
+                    //await UserManager.AddToRoleAsync(user.Id, "Employer");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+
+                    //storing new user to employee
+                    Employee employee = new Employee { Id = user.Id, Name = model.Name, DOB = model.DOB, Address = model.Address };
+                    ApplicationDbContext _context = new ApplicationDbContext();
+                    _context.Employees.Add(employee);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("Index", "Transactions");
                 }
                 AddErrors(result);
             }
@@ -449,7 +463,7 @@ namespace Nail_Salon_Manager.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Transactions");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

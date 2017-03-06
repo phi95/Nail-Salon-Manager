@@ -1,0 +1,30 @@
+﻿@model Nail_Salon_Manager.ViewModel.TransactionFormViewModel
+
+@{
+    ViewBag.Title = "TransactionForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Transactions"))
+{
+    if (User.IsInRole(Nail_Salon_Manager.Models.RoleName.Employer))
+    {
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transaction.EmployeeId)
+            @Html.DropDownListFor(x => x.Transaction.EmployeeId, new SelectList(Model.Employees, "Id", "Name"), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Transaction.EmployeeId)
+        </div>
+    }
+    <div class="form-group">
+        @Html.LabelFor(x => x.Transaction.Amount)
+        @Html.TextBoxFor(x => x.Transaction.Amount, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Transaction.Amount)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Transaction.Description)
+        @Html.TextBoxFor(x => x.Transaction.Description, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}

@@ -28,7 +28,7 @@ namespace Nail_Salon_Manager.Controllers
             return View(employees);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
             var employee = _context.Employees.SingleOrDefault(x => x.Id == id);
 
@@ -39,7 +39,7 @@ namespace Nail_Salon_Manager.Controllers
         }
 
         [Route("employees/transactions/{id}")]
-        public ActionResult Transactions(int id)
+        public ActionResult Transactions(string id)
         {
             var employee = _context.Employees.SingleOrDefault(x => x.Id == id);
 

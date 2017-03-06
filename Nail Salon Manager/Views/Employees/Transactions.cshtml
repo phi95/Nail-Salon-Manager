@@ -8,7 +8,7 @@
 <h2>@Model.Name's Transactions</h2>
 
 <br/>
-<table id="transactions" class="table table-bordered table-hover">
+<table id="EmployeeTransactions" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Date</th>
@@ -24,9 +24,10 @@
 {
     <script>
         $(document).ready(function () {
-            var table = $("#transactions").DataTable({
+            var table = $("#EmployeeTransactions").DataTable({
                 ajax: {
-                    url: "/api/employees/" + @Model.Id + "/transactions",
+                    url: "/api/employees/transactions/@Model.Id",
+                    method: "GET",
                     dataSrc: ""
                 },
                 columns: [
