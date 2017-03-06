@@ -3,9 +3,14 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                @{
+                    if (User.IsInRole(Nail_Salon_Manager.Models.RoleName.Employer))
+                    {
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    }
+                }
             </button>
             @{
                 if (User.IsInRole(Nail_Salon_Manager.Models.RoleName.Employer))
@@ -19,11 +24,17 @@
             }
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
-                <li>@Html.ActionLink("Transactions", "Index", "Transactions")</li>
-                <li>@Html.ActionLink("Inventory", "Index", "InventoryItems")</li>
-            </ul>
+            @{
+                if (User.IsInRole(Nail_Salon_Manager.Models.RoleName.Employer))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                        <li>@Html.ActionLink("Transactions", "Index", "Transactions")</li>
+                        <li>@Html.ActionLink("Inventory", "Index", "InventoryItems")</li>
+                    </ul>
+                }
+            }
+
             @Html.Partial("_LoginPartial")
         </div>
     </div>

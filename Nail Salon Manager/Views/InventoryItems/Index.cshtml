@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 style="display: inline-block">Inventories</h2>
+<h2 style="display: inline-block">Inventory Items</h2>
 <h2 style="display: inline-block; float: right;"><a href="/inventoryitems/new"><span class="glyphicon glyphicon-plus"></span></a></h2>
 
 <br />
@@ -14,7 +14,6 @@
         <tr>
             <th>Inventory</th>
             <th>Cost</th>
-            <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -32,19 +31,10 @@
                 },
                 columns: [
                     {
-                        data: "name",
-                        render: function (data, type, inventoryItem) {
-                            return "<a href='/inventoryItems/details/" + inventoryItem.id + "'>" + inventoryItem.name + "</a>";
-                        }
+                        data: "name"
                     },
                     {
-                        data: "amount"
-                    },
-                    {
-                        data: "id",
-                        render: function (data, type, inventoryItem) {
-                            return "<a href='/inventoryItems/edit/" + inventoryItem.id + "'><span class='glyphicon glyphicon-edit></span></a>";
-                        }
+                        data: "cost"
                     },
                     {
                         data: "id",

@@ -86,7 +86,9 @@ namespace Nail_Salon_Manager.Controllers.Api
             if (employeeInDb == null)
                 return NotFound();
 
+            var employeeInUser = _context.Users.SingleOrDefault(x => x.Id == id);
             _context.Employees.Remove(employeeInDb);
+            _context.Users.Remove(employeeInUser);
             _context.SaveChanges();
 
             return Ok();

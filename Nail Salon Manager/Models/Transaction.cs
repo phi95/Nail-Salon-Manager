@@ -10,17 +10,16 @@ namespace Nail_Salon_Manager.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public DateTime Date { get; set; }
 
         [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "Please enter valid number")]
         public double Amount { get; set; }
 
         public string Description { get; set; }
 
         public Employee Employee { get; set; }
 
-        [Required]
         [Display(Name = "Employee")]
         public string EmployeeId { get; set; }
     }

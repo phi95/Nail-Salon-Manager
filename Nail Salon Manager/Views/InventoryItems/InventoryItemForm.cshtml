@@ -1,23 +1,29 @@
-﻿@model Nail_Salon_Manager.ViewModel.InventoryItemViewModel
+﻿@model Nail_Salon_Manager.Models.InventoryItem
 
 @{
-    ViewBag.Title = "TransactionForm";
+    ViewBag.Title = "InventoryItemForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Title</h2>
+<h2>New Inventory Item</h2>
 
 @using (Html.BeginForm("Save", "InventoryItems"))
 {
     <div class="form-group">
-        @Html.LabelFor(x => x.InventoryItem.Name)
-        @Html.TextBoxFor(x => x.InventoryItem.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.InventoryItem.Name)
+        @Html.LabelFor(x => x.Name)
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Name)
     </div>
     <div class="form-group">
-        @Html.LabelFor(x => x.InventoryItem.Cost)
-        @Html.TextBoxFor(x => x.InventoryItem.Cost, new { @class = "form-control" })
+        @Html.LabelFor(x => x.Cost)
+        @Html.TextBoxFor(x => x.Cost, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Cost)
     </div>
-    @Html.HiddenFor(x => x.InventoryItem.Id)
+    @Html.HiddenFor(x => x.Id)
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
 }

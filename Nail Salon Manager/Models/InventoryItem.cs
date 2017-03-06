@@ -14,6 +14,8 @@ namespace Nail_Salon_Manager.Models
         [StringLength(255)]
         public string Name { get; set; }
 
+        [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "Please enter valid number")]
         public double Cost { get; set; }
     }
 }

@@ -276,6 +276,10 @@
     <Compile Include="Migrations\201703020124222_addedRequirementsToTransaction.Designer.cs">
       <DependentUpon>201703020124222_addedRequirementsToTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703060814538_updatedTransaction.cs" />
+    <Compile Include="Migrations\201703060814538_updatedTransaction.Designer.cs">
+      <DependentUpon>201703060814538_updatedTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -286,7 +290,6 @@
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModel\InventoryItemViewModel.cs" />
     <Compile Include="ViewModel\TransactionFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -525,11 +528,9 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\InventoryItems\Index.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
-    <Content Include="Views\InventoryItems\Details.cshtml" />
     <Content Include="Views\Transactions\Details.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
-    <Content Include="Views\Employees\EmployeeForm.cshtml" />
     <Content Include="Views\Employees\Transactions.cshtml" />
     <Content Include="Views\InventoryItems\InventoryItemForm.cshtml" />
     <Content Include="Views\Transactions\TransactionForm.cshtml" />
@@ -581,6 +582,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703020124222_addedRequirementsToTransaction.resx">
       <DependentUpon>201703020124222_addedRequirementsToTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703060814538_updatedTransaction.resx">
+      <DependentUpon>201703060814538_updatedTransaction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

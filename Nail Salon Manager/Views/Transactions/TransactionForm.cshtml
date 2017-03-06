@@ -26,5 +26,11 @@
         @Html.LabelFor(x => x.Transaction.Description)
         @Html.TextBoxFor(x => x.Transaction.Description, new { @class = "form-control" })
     </div>
+    @Html.HiddenFor(x => x.Transaction.Id)
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
 }

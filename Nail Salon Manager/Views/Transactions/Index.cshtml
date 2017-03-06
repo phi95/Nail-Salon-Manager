@@ -16,67 +16,130 @@
             <td>Date</td>
             <th>Amount</th>
             <th>Description</th>
-            <th>Employee</th>
+            @if (User.IsInRole(Nail_Salon_Manager.Models.RoleName.Employer))
+            {
+                <th>Employee</th>
+            }
             <th>Delete</th>
         </tr>
     </thead>
     <tbody></tbody>
 </table>
 
-@section scripts
+@if (User.IsInRole(Nail_Salon_Manager.Models.RoleName.Employer))
 {
-    <script>
-        $(document).ready(function () {
-            var table = $("#transactions").DataTable({
-                ajax: {
-                    url: "/api/transactions",
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        data: "date",
-                        render: function (data, type, transaction) {
-                            return formateDate(transaction.date);
-                        }
+    @section scripts
+    {
+        <script>
+            $(document).ready(function () {
+                var table = $("#transactions").DataTable({
+                    ajax: {
+                        url: "/api/transactions",
+                        dataSrc: ""
                     },
-                    {
-                        data: "amount",
-                    },
-                    {
-                        data: "description"
-                    },
-                    {
-                        data: "employee.name"
-                    },
-                    {
-                        data: "id",
-                        render: function (data) {
-                            return "<button class='btn-link'><span class='glyphicon glyphicon-remove js-delete' data-transaction-id=" + data + "></span></button>";
-                        }
-                    }
-
-                ]
-            });
-
-            function formateDate(date) {
-                return new Date(date).toLocaleDateString('en-US', {timeZone: 'UTC'});
-            }
-
-            $("#transactions").on("click", ".js-delete", function () {
-                var button = $(this);
-
-                bootbox.confirm("Are you sure you want to delete this transaction?", function (result) {
-                    if (result) {
-                        $.ajax({
-                            url: "/api/transactions/" + button.attr("data-transaction-id"),
-                            method: "DELETE",
-                            success: function () {
-                                table.row(button.parents("tr")).remove().draw();
+                    columns: [
+                        {
+                            data: "date",
+                            render: function (data, type, transaction) {
+                                return formateDate(transaction.date);
                             }
-                        });
-                    }
+                        },
+                        {
+                            data: "amount",
+                        },
+                        {
+                            data: "description"
+                        },
+                        {
+                            data: "employee.name"
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                return "<button class='btn-link'><span class='glyphicon glyphicon-remove js-delete' data-transaction-id=" + data + "></span></button>";
+                            }
+                        }
+
+                    ]
+                });
+
+                function formateDate(date) {
+                    return new Date(date).toLocaleDateString('en-US', {timeZone: 'UTC'});
+                }
+
+                $("#transactions").on("click", ".js-delete", function () {
+                    var button = $(this);
+
+                    bootbox.confirm("Are you sure you want to delete this transaction?", function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/transactions/" + button.attr("data-transaction-id"),
+                                method: "DELETE",
+                                success: function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                }
+                            });
+                        }
+                    });
                 });
             });
-        });
-    </script>
+        </script>
+    }
+}
+else
+{
+    @section scripts
+    {
+        <script>
+            $(document).ready(function () {
+                var table = $("#transactions").DataTable({
+                    ajax: {
+                        url: "/api/transactions",
+                        dataSrc: ""
+                    },
+                    columns: [
+                        {
+                            data: "date",
+                            render: function (data, type, transaction) {
+                                return formateDate(transaction.date);
+                            }
+                        },
+                        {
+                            data: "amount",
+                        },
+                        {
+                            data: "description"
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                return "<button class='btn-link'><span class='glyphicon glyphicon-remove js-delete' data-transaction-id=" + data + "></span></button>";
+                            }
+                        }
+
+                    ]
+                });
+
+                function formateDate(date) {
+                    return new Date(date).toLocaleDateString('en-US', {timeZone: 'UTC'});
+                }
+
+                $("#transactions").on("click", ".js-delete", function () {
+                    var button = $(this);
+
+                    bootbox.confirm("Are you sure you want to delete this transaction?", function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/transactions/" + button.attr("data-transaction-id"),
+                                method: "DELETE",
+                                success: function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    }
 }

@@ -38,22 +38,6 @@ namespace Nail_Salon_Manager.Controllers
             return View("TransactionForm", viewModel);
         }
 
-        public ActionResult Edit(int id)
-        {
-            var transaction = _context.Transactions.SingleOrDefault(x => x.Id == id);
-
-            if (transaction == null)
-                return HttpNotFound();
-
-            var viewModel = new TransactionFormViewModel
-            {
-                Transaction = transaction,
-                Employee = _context.Employees.SingleOrDefault(x => x.Id == transaction.EmployeeId)
-            };
-
-            return View("TransactionForm", viewModel);
-        }
-
         [HttpPost]
         public ActionResult Save(Transaction transaction)
         {
